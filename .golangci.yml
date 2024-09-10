@@ -1,0 +1,93 @@
+# More info on config here: https://github.com/golangci/golangci-lint#config-file
+run:
+  modules-download-mode: vendor
+  timeout: 3m
+  issues-exit-code: 1
+  tests: true
+  build-tags:
+    - integration
+  skip-dirs:
+    - ^bin$
+    - internal/generated
+
+output:
+  formats:
+    - format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - contextcheck
+    - dogsled
+    - durationcheck
+    - errcheck
+    - errname
+    - exhaustive
+    - exportloopref
+    - forcetypeassert
+    - gci
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofumpt
+    - goimports
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - makezero
+    - misspell
+    - nakedret
+    - nilerr
+    - nilnil
+    - noctx
+    - prealloc
+    - revive
+    - staticcheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+
+issues:
+  exclude-use-default: false
+  exclude:
+    - G104
+    - exported func .* returns unexported type .*, which can be annoying to use
+    - should have a package comment, unless it's in another file for this package
+    - don't use an underscore in package name
+    - Error return value of .((os\.)?std(out|err)\..*|.*Close|.*Flush|os\.Remove(All)?|.*printf?|os\.(Un)?Setenv|.*Rollback). is not checked
+    - should check returned error before deferring
+    - "not declared by package utf8"
+    - "unicode/utf8/utf8.go"
+    - "or be unexported"
+    - "should have a package comment"
+    - "comment on exported const"
+    - "`HandleBatch` should pass the context parameter"
+
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+      - localmodule
+    custom-order: true
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  govet:
+    enable:
+      - shadow
+  gocognit:
+    min-complexity: 35
+  gocyclo:
+    min-complexity: 35
+  gofumpt:
+    module-path: github.com/Isotere/kw-database
