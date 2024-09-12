@@ -6,9 +6,6 @@ run:
   tests: true
   build-tags:
     - integration
-  skip-dirs:
-    - ^bin$
-    - internal/generated
 
 output:
   formats:
@@ -28,7 +25,7 @@ linters:
     - errcheck
     - errname
     - exhaustive
-    - exportloopref
+    - copyloopvar
     - forcetypeassert
     - gci
     - gocognit
@@ -89,5 +86,7 @@ linters-settings:
     min-complexity: 35
   gocyclo:
     min-complexity: 35
+  goimports:
+    local-prefixes: github.com/Isotere/kw-database
   gofumpt:
     module-path: github.com/Isotere/kw-database
