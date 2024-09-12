@@ -50,9 +50,13 @@ func run(host string, port int) (exitCode int) {
 	ctx, ctxCancel := context.WithCancel(context.Background())
 	defer ctxCancel()
 
+	// Router and routes
+	// ************************************************************************
 	router := initRouter(log)
 
 	router.Get("/_echo", echo.New().Handle)
+
+	// ************************************************************************
 
 	// Запуск сервера http с grace-full shutdown
 	// ************************************************************************
