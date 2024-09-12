@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/Isotere/kw-database/apps/server/app/handlers/start"
+	"github.com/Isotere/kw-database/apps/server/app/commands/start"
 )
 
 // startCmd represents the start command
