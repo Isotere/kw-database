@@ -80,9 +80,9 @@ func run(host string, port int) (exitCode int) {
 		log.Info("Server shutdown finished")
 	}()
 
-	handler := handler.New(log)
+	h := handler.New(log)
 
-	err = server.Listen(ctx, handler.Handle)
+	err = server.Listen(ctx, h.Handle)
 	if err != nil {
 		log.WithError("tcp server error", err)
 		return fail
