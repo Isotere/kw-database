@@ -4,3 +4,4 @@
 logs/*
 !.gitkeeper
 
+.idea

@@ -17,10 +17,6 @@ var startCmd = &cobra.Command{
 	Long:  `Longer Description Will be Later`,
 	Run: func(cmd *cobra.Command, _ []string) {
 		hostFlag := cmd.Flags().Lookup("host")
-		if hostFlag == nil {
-			fmt.Println("Host is required")
-			os.Exit(1)
-		}
 
 		portFlag := cmd.Flags().Lookup("port")
 		if portFlag == nil {
@@ -28,7 +24,11 @@ var startCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		host := hostFlag.Value.String()
+		host := ""
+		if hostFlag != nil {
+			host = hostFlag.Value.String()
+		}
+
 		port, _ := strconv.Atoi(portFlag.Value.String())
 
 		start.Handle(host, port)
@@ -38,6 +38,6 @@ var startCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(startCmd)
 
-	startCmd.Flags().StringP("host", "H", defaultHost, "server host")
-	startCmd.Flags().Int32P("port", "p", defaultPort, "server port")
+	startCmd.Flags().StringP("host", "H", "", "server host")
+	startCmd.Flags().Int32P("port", "p", -1, "server port")
 }
